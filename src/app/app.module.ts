@@ -10,8 +10,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { AuthIntercepter } from './auth/services/authinterceptor.service';
+import { GloabalFeedModule } from './shared/modules/globalFeed/globalFeed.module';
 import { TopbarModule } from './shared/modules/topbar/topbar.module';
 import { PersistanceServoce } from './shared/services/persistance.service';
+import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { YourFeedModule } from './shared/modules/yourFeed/yourFeed.module';
+import { TagFeedModule } from './shared/modules/tagFeed/tagFeed.module';
 
 @NgModule({
   declarations: [
@@ -21,13 +25,19 @@ import { PersistanceServoce } from './shared/services/persistance.service';
     BrowserModule,
     AppRoutingModule,
     AuthModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({
+      router: routerReducer
+    }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production
     }),
     EffectsModule.forRoot([]),
-    TopbarModule
+    TopbarModule,
+    GloabalFeedModule,
+    YourFeedModule,
+    TagFeedModule,
+    StoreRouterConnectingModule.forRoot()
   ],
   providers: [
     PersistanceServoce,
