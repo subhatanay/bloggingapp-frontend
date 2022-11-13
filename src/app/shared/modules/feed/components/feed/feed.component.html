@@ -15,7 +15,12 @@
         <span class="date">{{ article.createdAt}}</span>
       </div>
       <div class="pull-xs-right">
-        ADD TO FAVOUTITES
+        <mc-add-to-faviourites
+          *ngIf="this.isLoggedIn$ | async"
+          [isFavioured]="article.favorited"
+          [articleSlug]="article.slug"
+          [favouriteCount]="article.favoritesCount"
+        ></mc-add-to-faviourites>
       </div>
     </div>
     <a [routerLink]="['/articles',article.slug]" class="preview-link">

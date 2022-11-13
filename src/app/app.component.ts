@@ -9,7 +9,7 @@ import { getCurrentUserAction } from './auth/store/getCurrentUser.actions';
 })
 export class AppComponent implements OnInit {
 
-  title = 'blogging-frontend-app';
+  title = 'Medium Clone';
 
   constructor(private store: Store) {}
 

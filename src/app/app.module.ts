@@ -21,6 +21,8 @@ import { TagListModule } from './shared/modules/tag-list/tagList.module';
 import { CreateArticleComponent } from './createArticle/components/createArticle/createArticle.component';
 import { CreateArticleModule } from './createArticle/createArticle.module';
 import { EditArticleModule } from './editArticle/editArticle.module';
+import { SettingsModule } from './settings/settings.module';
+import { UserProfileModule } from './userProfile/userProfile.module';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { EditArticleModule } from './editArticle/editArticle.module';
     CreateArticleModule,
     ArticleModule,
     EditArticleModule,
+    SettingsModule,
+    UserProfileModule,
     StoreRouterConnectingModule.forRoot()
   ],
   providers: [

@@ -18,4 +18,12 @@ export class PersistanceServoce {
       console.log('Error while getting data to localStorage', e);
     }
   }
+
+  remove(key: string) : void {
+    try {
+      localStorage.removeItem(key)
+    } catch (e) {
+      console.log('Error while removing data to localStorage', e);
+    }
+  }
 }

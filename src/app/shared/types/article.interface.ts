@@ -9,7 +9,7 @@ export interface IArticle {
   tagList: string[]
   description: string
   favorited: boolean
-  favouritesCount: number
+  favoritesCount: number
   author: IProfile
 
 }

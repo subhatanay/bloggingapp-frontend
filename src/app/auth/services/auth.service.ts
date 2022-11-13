@@ -7,6 +7,8 @@ import { IRegisterRequest } from '../types/registerRequest.interface';
 import { environment } from 'src/environments/environment';
 import { IAuthResponse } from '../types/authResponse.interface';
 import { ILoginRequest } from '../types/loginRequest.interface';
+import { ICurrentUserInput } from 'src/app/shared/types/ICurrentUserInput.interface';
+import { IUpdateUserRequest } from '../types/updateUserRequest.interface';
 
 @Injectable()
 export class AuthService {
@@ -30,6 +32,13 @@ export class AuthService {
     const url = environment.apiUrl + '/user';
     return this.http
       .get(url)
+      .pipe(map((response: IAuthResponse) => response.user));
+  }
+
+  updateCurrentUser(data: IUpdateUserRequest): Observable<ICurrentUser> {
+    const url = environment.apiUrl + '/user';
+    return this.http
+      .put(url, data)
       .pipe(map((response: IAuthResponse) => response.user));
   }
 }

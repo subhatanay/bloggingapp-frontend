@@ -34,7 +34,7 @@ const routes = [
     ErrorMessageModule,
     TagListModule,
     StoreModule.forFeature('article', reducers),
-    EditArticleModule
+
   ],
   declarations: [ArticleComponent],
   exports: [],

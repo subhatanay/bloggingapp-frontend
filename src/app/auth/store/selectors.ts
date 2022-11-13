@@ -8,7 +8,7 @@ export const isSubmittingSelector = createSelector(authFeatureSelector, (authSta
 
 export const validationErrorsSelector = createSelector(authFeatureSelector, (authState: IAuthState) => authState.validationErrors)
 
-export const isLoggedInSelector = createSelector(authFeatureSelector, (authState: IAuthState) => authState.isLoggedIn == true)
+export const isLoggedInSelector = createSelector(authFeatureSelector, (authState: IAuthState) => authState.isLoggedIn === true)
 
 export const isAnnonymousSelector = createSelector(authFeatureSelector, (authState: IAuthState) => authState.isLoggedIn == false || authState.isLoggedIn == null)
 

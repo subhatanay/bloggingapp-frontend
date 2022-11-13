@@ -1,8 +1,9 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { parseUrl, stringify } from 'query-string';
 import { Observable, Subscription } from 'rxjs';
+import { isLoggedInSelector } from 'src/app/auth/store/selectors';
 import { environment } from 'src/environments/environment';
 import { getFeedAction } from '../../store/actions/getFeed.actions';
 
@@ -18,18 +19,18 @@ import { IGetFeedResponse } from '../../types/getFeedResponse.interface';
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss'],
 })
-export class FeedComponent implements OnInit , OnDestroy {
+export class FeedComponent implements OnInit , OnDestroy, OnChanges {
   @Input('apiUrl') apiUrlProps: string;
   feed$: Observable<IGetFeedResponse | null>;
   error$: Observable<string | null>;
   isLoading$: Observable<boolean>;
+  isLoggedIn$: Observable<boolean>;
   limit: number;
   baseUrl: string;
   queryParamsSubscription: Subscription
   currentPage: number
 
   constructor(private store: Store, private router: Router, private route : ActivatedRoute) {}
-
 
   ngOnInit(): void {
     this.initializeValues();
@@ -49,6 +50,7 @@ export class FeedComponent implements OnInit , OnDestroy {
     this.feed$ = this.store.pipe(select(dataFeedSelector));
     this.error$ = this.store.pipe(select(errorFeedSelector));
     this.isLoading$ = this.store.pipe(select(isLoadingFeedSelector));
+    this.isLoggedIn$ = this.store.pipe(select(isLoggedInSelector));
     this.limit = environment.limit;
     this.baseUrl = this.router.url.split('?')[0];
   }
@@ -64,6 +66,12 @@ export class FeedComponent implements OnInit , OnDestroy {
     const apiUrlWithParams = parsedUrl.url + "?" + stringfiedParams
     console.log(apiUrlWithParams)
     this.store.dispatch(getFeedAction({ url: apiUrlWithParams }));
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+     if (!changes['apiUrlProps'].firstChange &&changes['apiUrlProps'].previousValue !== changes['apiUrlProps'].currentValue) {
+        this.fetchFeedData()
+     }
   }
 
   ngOnDestroy(): void {
