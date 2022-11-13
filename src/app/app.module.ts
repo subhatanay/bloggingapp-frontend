@@ -16,6 +16,11 @@ import { PersistanceServoce } from './shared/services/persistance.service';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { YourFeedModule } from './shared/modules/yourFeed/yourFeed.module';
 import { TagFeedModule } from './shared/modules/tagFeed/tagFeed.module';
+import { ArticleModule } from './article/article.module';
+import { TagListModule } from './shared/modules/tag-list/tagList.module';
+import { CreateArticleComponent } from './createArticle/components/createArticle/createArticle.component';
+import { CreateArticleModule } from './createArticle/createArticle.module';
+import { EditArticleModule } from './editArticle/editArticle.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +42,9 @@ import { TagFeedModule } from './shared/modules/tagFeed/tagFeed.module';
     GloabalFeedModule,
     YourFeedModule,
     TagFeedModule,
+    CreateArticleModule,
+    ArticleModule,
+    EditArticleModule,
     StoreRouterConnectingModule.forRoot()
   ],
   providers: [
