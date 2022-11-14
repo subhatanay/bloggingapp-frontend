@@ -4,8 +4,10 @@ import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { EditArticleModule } from '../editArticle/editArticle.module';
+import { AddToFavouriteModule } from '../shared/modules/add-to-favourite/add-to-favourite.module';
 import { BannerModule } from '../shared/modules/banner/banner.module';
 import { ErrorMessageModule } from '../shared/modules/errorMessage/errorMessage.module';
+import { FollowAuthorModule } from '../shared/modules/follow-author/follow-author.module';
 import { LoadingModule } from '../shared/modules/loading/loading.module';
 import { TagListModule } from '../shared/modules/tag-list/tagList.module';
 import { ArticleService as SharedArticleService } from '../shared/services/articles.service';
@@ -34,6 +36,8 @@ const routes = [
     ErrorMessageModule,
     TagListModule,
     StoreModule.forFeature('article', reducers),
+    AddToFavouriteModule,
+    FollowAuthorModule
 
   ],
   declarations: [ArticleComponent],

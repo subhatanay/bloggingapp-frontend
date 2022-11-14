@@ -1,5 +1,6 @@
 import { routerNavigatedAction, routerNavigationAction } from '@ngrx/router-store';
 import { Action, createReducer, on } from '@ngrx/store';
+import { favouriteActionSuccess, unFavouriteActionSuccess } from 'src/app/shared/modules/add-to-favourite/store/actions/add-to-favorite.actions';
 import { IArticleState } from '../types/articleState.interface';
 import {
   getArticleAction,
@@ -11,6 +12,7 @@ const initalState: IArticleState = {
   isLoading: false,
   data: null,
   error: null,
+  isFavourited: null
 };
 
 const articleReducer = createReducer(
@@ -29,6 +31,7 @@ const articleReducer = createReducer(
       isLoading: false,
       data: action.article,
       error: null,
+      isFavourited: action.article.favorited
     })
   ),
   on(
@@ -43,7 +46,22 @@ const articleReducer = createReducer(
   on(
     routerNavigationAction,
     ():IArticleState => initalState
-  )
+  ),
+  on(
+    favouriteActionSuccess,
+    (state,action): IArticleState => ({
+      ...state,
+      data: action.article
+    })
+  ),
+  on(
+    unFavouriteActionSuccess,
+    (state,action): IArticleState => ({
+      ...state,
+      data: action.article
+    })
+  ),
+
 );
 
 

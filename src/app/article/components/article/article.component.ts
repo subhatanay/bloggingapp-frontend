@@ -11,6 +11,8 @@ import { deleteArticleAction } from '../../store/actions/delete-article.actions'
 import {
   dataArticleSelector,
   errorArticleSelector,
+  favoriteAritcleCountSelector,
+  isFavouriteArticleSelector,
   isLoadingArticleSelector,
 } from '../../store/selectors';
 
@@ -26,6 +28,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
   articleSlugId: string;
   article: IArticle;
   isAuthor$: Observable<boolean | null>
+
+  isArticleFavourited$: Observable<boolean | null>
+  favoriteCount$: Observable<number>
+
 
   constructor(
     private store: Store,
@@ -43,15 +49,23 @@ export class ArticleComponent implements OnInit, OnDestroy {
       .pipe(select(dataArticleSelector))
       .subscribe((article: IArticle | null) => {
         this.article = article;
+        if (this.article) {
+
+          console.log("value chanegs " + this.article.favorited )
+        }
+
       });
     this.fetchArticleData();
   }
+
 
   initializeValues(): void {
     this.articleSlugId = this.route.snapshot.paramMap.get('slug');
 
     this.error$ = this.store.pipe(select(errorArticleSelector));
     this.isLoading$ = this.store.pipe(select(isLoadingArticleSelector));
+    this.isArticleFavourited$ = this.store.pipe(select(isFavouriteArticleSelector))
+    this.favoriteCount$ = this.store.pipe(select(favoriteAritcleCountSelector))
 
     this.isAuthor$ = combineLatest(
       this.store.pipe(select(currentUserSelector)),

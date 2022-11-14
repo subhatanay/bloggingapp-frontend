@@ -1,5 +1,6 @@
 import { routerNavigatedAction, routerNavigationAction } from '@ngrx/router-store';
 import { Action, createReducer, on } from '@ngrx/store';
+import { favouriteActionSuccess } from '../../add-to-favourite/store/actions/add-to-favorite.actions';
 import { IFeedState } from '../types/feedState.interface';
 import {
   getFeedAction,
@@ -43,7 +44,7 @@ const feedReducer = createReducer(
   on(
     routerNavigationAction,
     ():IFeedState => initalState
-  )
+  ),
 );
 
 

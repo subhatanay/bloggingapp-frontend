@@ -9,3 +9,4 @@ export const isLoadingFeedSelector = createSelector(feedFeatureSelector, (feedSt
 export const errorFeedSelector = createSelector(feedFeatureSelector, (feedState: IFeedState) => feedState.error)
 
 export const dataFeedSelector = createSelector(feedFeatureSelector, (feedState: IFeedState) => feedState.data)
+

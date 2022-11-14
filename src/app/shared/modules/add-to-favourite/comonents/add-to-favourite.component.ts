@@ -1,4 +1,4 @@
-import { Component, Input, NgModule, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, NgModule, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
 import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { isLoggedInSelector } from "src/app/auth/store/selectors";
@@ -9,10 +9,12 @@ import { favouriteAction, unFavouriteAction } from "../store/actions/add-to-favo
   templateUrl: './add-to-favourite.component.html'
 })
 export class AddToFavouriteComponent implements OnInit {
-
+  @Input("dynamic") dynamicProps : boolean
   @Input("isFavioured") isFaviouredProps : boolean
   @Input("articleSlug") articleSlugProps: string
   @Input("favouriteCount") favouriteCountProps: number
+  @Input("buttonText") buttonTextProps: string
+
 
   favouriteCount: number = 5
   isFavorited: boolean
@@ -21,14 +23,16 @@ export class AddToFavouriteComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.favouriteCountProps)
-    this.favouriteCount = this.favouriteCountProps
-    this.isFavorited = this.isFaviouredProps
+    if (!this.dynamicProps) {
+      this.favouriteCount = this.favouriteCountProps
+      this.isFavorited = this.isFaviouredProps
+    }
+
   }
 
   onFavouiteClick() : void {
-    if (this.isFavorited) {
-      this.favouriteCount--
+    if (this.isFaviouredProps || this.isFavorited) {
+     this.favouriteCount--
       this.store.dispatch(unFavouriteAction({slug: this.articleSlugProps}))
     } else {
       this.favouriteCount++

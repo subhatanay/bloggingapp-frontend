@@ -9,3 +9,7 @@ export const isLoadingArticleSelector = createSelector(articleFeatureSelector, (
 export const errorArticleSelector = createSelector(articleFeatureSelector, (articleState: IArticleState) => articleState.error)
 
 export const dataArticleSelector = createSelector(articleFeatureSelector, (articleState: IArticleState) => articleState.data)
+
+export const isFavouriteArticleSelector = createSelector(articleFeatureSelector, (articleState: IArticleState) => articleState.data.favorited)
+
+export const favoriteAritcleCountSelector = createSelector(articleFeatureSelector, (articleState: IArticleState) => articleState.data.favoritesCount)

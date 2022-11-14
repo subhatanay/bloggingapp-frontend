@@ -16,12 +16,32 @@
             {{ article.createdAt }}
           </span>
         </div>
+        <mc-follow-author
+          [authorName]="article.author.username"
+          [following]="article.author.folllowing"
+        >
+        </mc-follow-author>
+        <mc-add-to-faviourites
+          [isFavioured]="isArticleFavourited$ | async"
+          [favouriteCount]="favoriteCount$ | async"
+          [articleSlug]="article.slug"
+          [buttonText]="
+            (isArticleFavourited$ | async) ? 'Unfavorite' : 'Favorite'
+          "
+          [dynamic]="true"
+        ></mc-add-to-faviourites>
 
         <span *ngIf="isAuthor$ | async">
-          <a [routerLink]="['/articles', article.slug, 'edit']" class="btn btn-outline-secondary btn-sm">
+          <a
+            [routerLink]="['/articles', article.slug, 'edit']"
+            class="btn btn-outline-secondary btn-sm"
+          >
             <i class="ion-edit"> Edit Article </i>
           </a>
-          <a class="btn btn-outline-danger btn-sm" (click)= "deleteArticle(article.slug)">
+          <a
+            class="btn btn-outline-danger btn-sm"
+            (click)="deleteArticle(article.slug)"
+          >
             <i class="ion-delete"> </i>
             Delete Article
           </a>
@@ -29,7 +49,6 @@
       </div>
     </div>
   </div>
-
 </div>
 <div class="container page">
   <mc-loading *ngIf="isLoading$ | async"></mc-loading>
