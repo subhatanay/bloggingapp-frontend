@@ -1,27 +1,31 @@
-# BloggingFrontendApp
+### Blogging APP Backend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.9.
+## Description
+Portfolio Front END application to manage Users, Articles , Comments , Likes , Followers
 
-## Development server
+## Requirements
+1. CRUD capabilities for USERS
+2. CRUD capabilities for BLOGS which would be scoped under a USER. i.e. only the user which creates a blog would be able to modify/delete it
+3. All USERS should be able to view BLOGS which have been posted
+4. A USER should be able to write a BLOG and post it for everyone to see
+5. A USER should be able to follow another USER so that their BLOGS have a higher priority on the former USER's feed
+6. USERS should be able to COMMENT under a BLOG. These comments would be public
+7. USERS should be able to LIKE / UNLIKE a BLOG
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Prerequisites
+1. Node 14
+3. Angular CLI
 
-## Code scaffolding
+## Local Deployment Steps
+1. Clone the project -> https://github.com/subhatanay/bloggingapp-frontend.git
+2. cd bloggingapp-frontend
+3. Open /Users/subhajgh/Documents/Cisco/poc/blogging-frontend-app/blogging-frontend-app/src/environments/environment.ts
+4. Update the localApiUrl -> http://localhost:6060/api
+3. npm install
+4. npm start
+5. Front Application will be up in 4200 port. 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Backend App Deployment Steps
+Follow https://github.com/subhatanay/blogging-app/blob/main/README.md
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Demo

@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://conduit.productionready.io/api',
-  localApiUrl: 'http://localhost:6060/api',
+  apiUrl: '',
+  localApiUrl: 'http://bloggingapp:6060/api',
   limit: 10
 };
 
