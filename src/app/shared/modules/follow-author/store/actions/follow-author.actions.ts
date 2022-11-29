@@ -5,7 +5,7 @@ import { FollowAuthActionTypes } from "./actionTypes";
 
 export const followAuthorAction = createAction(
   FollowAuthActionTypes.FOLLOW_AUTHOR_ACTION,
-  props<{author: string}>()
+  props<{authorId: number}>()
 )
 export const followAuthorActionSuccess = createAction(
   FollowAuthActionTypes.FOLLOW_AUTHOR_ACTION_SUCCESS,
@@ -17,7 +17,7 @@ export const followAuthorActionFailure = createAction(
 
 export const unfollowAuthorAction = createAction(
   FollowAuthActionTypes.UNFOLLOW_AUTHOR_ACTION,
-  props<{author: string}>()
+  props<{authorId: number}>()
 )
 export const unfollowAuthorActionSuccess = createAction(
   FollowAuthActionTypes.UNFOLLOW_AUTHOR_ACTION_SUCCESS,

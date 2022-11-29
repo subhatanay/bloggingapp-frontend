@@ -1,3 +1,4 @@
 export interface IBackendError {
-  [key: string]: string[]
+  errorCode: number,
+  errorMessage: string
 }

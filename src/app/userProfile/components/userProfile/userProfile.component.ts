@@ -22,7 +22,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   error$: Observable<string | null>;
   userProfileSubscription: Subscription;
   apiUrl: string;
-  slug: string;
+  userId: number;
   isCurrentUserProfile$ : Observable<boolean>
   slugRouterValueChange$: Subscription
 
@@ -42,14 +42,16 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       });
 
     this.slugRouterValueChange$ = this.route.params.subscribe((param) => {
-      this.slug = param['slug']
+      this.userId = param['userId']
 
       this.fetchUserProfileData()
     })
+
+
   }
 
   initailizeValues(): void {
-    this.slug = this.route.snapshot.paramMap.get('slug');
+    this.userId = parseInt(this.route.snapshot.paramMap.get('userId'));
     this.isLoading$ = this.store.pipe(select(isLoadingSelector));
     this.error$ = this.store.pipe(select(errorUserProfileSelector));
 
@@ -67,11 +69,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   getApiUrl(): string {
     const isFavouries = this.router.url.includes("favorites")
-    return this.apiUrl = isFavouries ? "/articles/?favorited=" + this.slug   : "/articles/?author=" + this.slug;
+    return this.apiUrl = isFavouries ? "/users/"+ this.userId + "/profile/liked/articles/"   : "/users/" +  this.userId + "/articles";
   }
 
   fetchUserProfileData() {
-    this.store.dispatch(getUserProfileAction({ slug: this.slug }));
+    this.store.dispatch(getUserProfileAction({ userId: this.userId }));
   }
   ngOnDestroy(): void {
     this.slugRouterValueChange$.unsubscribe()

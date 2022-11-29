@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   initializeForm() : void {
     this.form = this.fb.group({
-      email: ['', Validators.required],
+      emailId: ['', Validators.required],
       password : ['', Validators.required]
     })
   }
@@ -38,7 +38,8 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     const request: ILoginRequest = {
-      user: this.form.value
+      emailId: this.form.value["emailId"],
+      password: this.form.value["password"]
     }
     this.store.dispatch(loginAction({request}))
   }

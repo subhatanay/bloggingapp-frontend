@@ -4,7 +4,7 @@ import { ArticleActionType } from '../articleActionTypes';
 
 export const deleteArticleAction = createAction(
   ArticleActionType.DELETE_ARTICLE,
-  props<{ slug: string }>()
+  props<{ articleId: number }>()
 );
 
 export const deleteArticleActionSuccess = createAction(

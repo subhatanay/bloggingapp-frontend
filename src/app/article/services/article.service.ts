@@ -8,8 +8,8 @@ export class ArticleService {
 
   constructor(private http: HttpClient) {}
 
-  deleteArticle(slug: string) : Observable<{}> {
-    const url = environment.apiUrl + "/articles/" + slug
+  deleteArticle(articleId: number) : Observable<{}> {
+    const url = environment.localApiUrl + "/articles/" + articleId
     return this.http.delete<{}>(url)
   }
 }

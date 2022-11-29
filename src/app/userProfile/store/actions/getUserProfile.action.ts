@@ -4,7 +4,7 @@ import { ActionTypes } from "../actionTypes"
 
 export const getUserProfileAction = createAction(
   ActionTypes.GET_USER_PROFILE,
-  props<{slug: string}>()
+  props<{userId: number}>()
 )
 
 export const getUserProfileActionSuccess = createAction(

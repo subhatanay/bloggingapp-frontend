@@ -6,6 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { EditArticleModule } from '../editArticle/editArticle.module';
 import { AddToFavouriteModule } from '../shared/modules/add-to-favourite/add-to-favourite.module';
 import { BannerModule } from '../shared/modules/banner/banner.module';
+import { CommentModule } from '../shared/modules/comment/comment.module';
 import { ErrorMessageModule } from '../shared/modules/errorMessage/errorMessage.module';
 import { FollowAuthorModule } from '../shared/modules/follow-author/follow-author.module';
 import { LoadingModule } from '../shared/modules/loading/loading.module';
@@ -21,7 +22,7 @@ import { reducers } from './store/reducers';
 
 const routes = [
   {
-    path: 'articles/:slug',
+    path: 'articles/:articleId',
     component: ArticleComponent
   }
 ]
@@ -37,7 +38,8 @@ const routes = [
     TagListModule,
     StoreModule.forFeature('article', reducers),
     AddToFavouriteModule,
-    FollowAuthorModule
+    FollowAuthorModule,
+    CommentModule
 
   ],
   declarations: [ArticleComponent],

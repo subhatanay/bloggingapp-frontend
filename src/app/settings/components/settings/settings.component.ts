@@ -47,23 +47,24 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
   initializeForm(): void {
     this.form = this.fb.group({
-      image: this.currentUser.image,
+      image: this.currentUser.userLogoUrl,
       username: this.currentUser.username,
+      fullName: this.currentUser.fullName,
       bio: this.currentUser.bio,
-      email: this.currentUser.email,
+      emailId: this.currentUser.emailId,
       password: '',
     });
   }
 
   onSubmit(): void {
-    const currentUserInput: ICurrentUserInput = {
-      ...this.currentUser,
-      ...this.form.value,
-    };
+
     const updateRequest: IUpdateUserRequest = {
-      user: currentUserInput,
+       fullName: this.form.value["fullName"]  ? this.form.value["fullName"] : null,
+       password: this.form.value["password"] ? this.form.value["password"] : null,
+       bio: this.form.value["bio"] ? this.form.value["bio"] : null,
+       profileImageLink: this.form.value["image"] ? this.form.value["image"] : null,
     };
-    this.store.dispatch(updateCurrentUserAction({ data: updateRequest }));
+    this.store.dispatch(updateCurrentUserAction({userId: this.currentUser.userId , data: updateRequest }));
   }
 
   logout(): void {

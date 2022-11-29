@@ -1,8 +1,10 @@
 export interface IArticleInput {
-  title: string,
-  description : string,
-  body: string,
-  tagList: string[]
+  subject: string | null,
+  content: string | null,
+  title: string | null,
+  description : string | null,
+  body: string | null,
+  tagList: string[] | null
 }
 
 export interface ICreateArticleRequest {

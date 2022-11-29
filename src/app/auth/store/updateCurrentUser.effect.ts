@@ -19,14 +19,14 @@ export class UpdateCurrentEffect {
   updateUserEffect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(updateCurrentUserAction),
-      switchMap(({ data }) => {
-        return this.authService.updateCurrentUser(data).pipe(
+      switchMap(({userId, data }) => {
+        return this.authService.updateCurrentUser(userId,data).pipe(
           map((currentUser: ICurrentUser) => {
             return updateCurrentUserActionSuccess({ currentUser });
           }),
           catchError((errorResponse: HttpErrorResponse) => {
             return of(
-              updateCurrentUserActionFailure({ errors: errorResponse.error.errors })
+              updateCurrentUserActionFailure({ errors: errorResponse.error })
             );
           })
         );

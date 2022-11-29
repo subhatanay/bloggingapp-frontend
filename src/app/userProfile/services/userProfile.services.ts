@@ -10,8 +10,8 @@ export class UserProfileService {
 
   constructor(private http: HttpClient) {}
 
-  getUserProfile(slug : string) : Observable<IUserProfile> {
-    const url = environment.apiUrl + "/profiles/" + slug
-    return this.http.get<IGetUserProfileResponse>(url).pipe(map((userReponse : IGetUserProfileResponse) => userReponse.profile))
+  getUserProfile(userId : number) : Observable<IUserProfile> {
+    const url = environment.localApiUrl + "/users/" + userId + "/profile/info"
+    return this.http.get<IUserProfile>(url).pipe(map((userReponse : IUserProfile) => userReponse))
   }
 }

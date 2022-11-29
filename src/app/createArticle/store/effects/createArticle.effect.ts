@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { CreateArticleService } from 'src/app/createArticle/services/createArticle.service';
+import { IArticleInput } from 'src/app/shared/modules/articleForm/types/articleInput.interface';
+import { IArticle } from 'src/app/shared/types/article.interface';
 import { ISaveArticleResponse } from 'src/app/shared/types/articleResponse.interface';
 import { createArticleAction, createArticleActionFaulure, createArticleActionSuccess } from '../actions/article.actions';
 
@@ -21,13 +23,13 @@ export class CreateArticleEffect {
       ofType(createArticleAction),
       switchMap(({ article }) => {
         return this.createArticleService.createArticle(article).pipe(
-          map((articleRes: ISaveArticleResponse) => {
+          map((article: IArticle) => {
 
-            return createArticleActionSuccess({ article:  articleRes.article });
+            return createArticleActionSuccess({article});
           }),
           catchError((errorResponse: HttpErrorResponse) => {
             return of(
-              createArticleActionFaulure({ error: errorResponse.error.errors })
+              createArticleActionFaulure({ error: errorResponse.error })
             );
           })
         );

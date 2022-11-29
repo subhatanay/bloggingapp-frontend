@@ -13,7 +13,7 @@ import { EditArticleEffect } from './store/effects/editArticle.effect';
 
 const routes = [
   {
-    path: 'articles/:slug/edit',
+    path: 'articles/:articleId/edit',
     component: EditArticleComponent
   }
 ]

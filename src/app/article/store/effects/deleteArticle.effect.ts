@@ -16,8 +16,8 @@ export class DeleteArticleEffect {
   deleteArticle$ = createEffect(() =>
     this.actions$.pipe(
       ofType(deleteArticleAction),
-      switchMap(( {slug} ) => {
-        return this.articleService.deleteArticle(slug).pipe(
+      switchMap(( {articleId} ) => {
+        return this.articleService.deleteArticle(articleId).pipe(
           map(() => {
             return deleteArticleActionSuccess();
           }),

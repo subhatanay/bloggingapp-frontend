@@ -10,6 +10,6 @@ export const errorArticleSelector = createSelector(articleFeatureSelector, (arti
 
 export const dataArticleSelector = createSelector(articleFeatureSelector, (articleState: IArticleState) => articleState.data)
 
-export const isFavouriteArticleSelector = createSelector(articleFeatureSelector, (articleState: IArticleState) => articleState.data.favorited)
+export const isFavouriteArticleSelector = createSelector(articleFeatureSelector, (articleState: IArticleState) => articleState.data?.liked)
 
-export const favoriteAritcleCountSelector = createSelector(articleFeatureSelector, (articleState: IArticleState) => articleState.data.favoritesCount)
+export const favoriteAritcleCountSelector = createSelector(articleFeatureSelector, (articleState: IArticleState) => articleState.data?.likesCount)

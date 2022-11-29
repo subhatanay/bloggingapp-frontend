@@ -11,7 +11,7 @@ import { favouriteAction, unFavouriteAction } from "../store/actions/add-to-favo
 export class AddToFavouriteComponent implements OnInit {
   @Input("dynamic") dynamicProps : boolean
   @Input("isFavioured") isFaviouredProps : boolean
-  @Input("articleSlug") articleSlugProps: string
+  @Input("articleSlug") articleSlugProps: number
   @Input("favouriteCount") favouriteCountProps: number
   @Input("buttonText") buttonTextProps: string
 
@@ -23,6 +23,7 @@ export class AddToFavouriteComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log(this.isFaviouredProps)
     if (!this.dynamicProps) {
       this.favouriteCount = this.favouriteCountProps
       this.isFavorited = this.isFaviouredProps
@@ -33,10 +34,10 @@ export class AddToFavouriteComponent implements OnInit {
   onFavouiteClick() : void {
     if (this.isFaviouredProps || this.isFavorited) {
      this.favouriteCount--
-      this.store.dispatch(unFavouriteAction({slug: this.articleSlugProps}))
+      this.store.dispatch(unFavouriteAction({articleId: this.articleSlugProps}))
     } else {
       this.favouriteCount++
-      this.store.dispatch(favouriteAction({slug: this.articleSlugProps}))
+      this.store.dispatch(favouriteAction({articleId: this.articleSlugProps}))
     }
 
     this.isFavorited = !this.isFavorited

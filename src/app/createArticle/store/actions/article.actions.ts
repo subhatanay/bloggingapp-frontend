@@ -6,7 +6,7 @@ import { CreateArticleActionTypes } from "../createArticleActionTypes";
 
 export const createArticleAction = createAction(
   CreateArticleActionTypes.CREATE_ARTICLE,
-  props<{article: ICreateArticleRequest}>()
+  props<{article: IArticleInput}>()
 )
 
 export const createArticleActionSuccess = createAction(

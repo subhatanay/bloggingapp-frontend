@@ -6,7 +6,7 @@ import { ArticleActionType } from '../articleActionTypes';
 
 export const getArticleAction = createAction(
   ArticleActionType.GET_ARTICLE,
-  props<{ slug: string }>()
+  props<{ articleId: number }>()
 );
 
 export const getArticleActionSuccess = createAction(

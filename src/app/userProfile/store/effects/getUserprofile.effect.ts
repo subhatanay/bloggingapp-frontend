@@ -17,8 +17,8 @@ export class GetUserProfileEffect {
   getUserProfile$ = createEffect(() =>
     this.actions$.pipe(
       ofType(getUserProfileAction),
-      switchMap(( {slug} ) => {
-        return this.userProfileService.getUserProfile(slug).pipe(
+      switchMap(( {userId} ) => {
+        return this.userProfileService.getUserProfile(userId).pipe(
           map((userProfile: IUserProfile) => {
             return getUserProfileActionSuccess({ userProfile });
           }),

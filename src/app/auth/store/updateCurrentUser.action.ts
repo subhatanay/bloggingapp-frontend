@@ -8,7 +8,7 @@ import { AuthActionTypes } from "./actionTypes";
 
 export const updateCurrentUserAction = createAction(
   AuthActionTypes.UPDATE_CURRENT_USER,
-  props<{data: IUpdateUserRequest}> ()
+  props<{userId: number, data: IUpdateUserRequest}> ()
 )
 
 export const updateCurrentUserActionSuccess = createAction(

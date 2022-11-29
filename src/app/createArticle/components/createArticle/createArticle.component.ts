@@ -13,10 +13,12 @@ import { isSubmittingSelector, validationErrorsSelector } from "../../store/sele
 })
 export class CreateArticleComponent implements OnInit {
   intialValues : IArticleInput = {
-    title: '',
+    subject: '',
     description: '',
-    body: '',
-    tagList: []
+    content: '',
+    tagList: [],
+    title: "",
+    body: ""
   }
 
   isSubmitting$ : Observable<boolean>
@@ -30,7 +32,7 @@ export class CreateArticleComponent implements OnInit {
   }
 
 
-  onSubmit(articleInput: ICreateArticleRequest) {
+  onSubmit(articleInput: IArticleInput) {
     console.log(articleInput)
     this.store.dispatch(createArticleAction({article : articleInput}))
   }

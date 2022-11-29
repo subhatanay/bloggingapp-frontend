@@ -7,7 +7,7 @@ import { Store } from "@ngrx/store";
   styleUrls: ['./yourFeed.component.scss']
 })
 export class YourFeedComponent implements OnInit {
-  apiUrl = "/articles/feed"
+  apiUrl = "/feed/me"
 
 
   constructor(private store : Store) {}

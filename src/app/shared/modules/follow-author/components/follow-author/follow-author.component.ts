@@ -7,6 +7,7 @@ import { followAuthorAction, unfollowAuthorAction } from "../../store/actions/fo
   templateUrl: "./follow-author.component.html"
 })
 export class FollowAuthorComponent implements OnInit {
+  @Input("authorId") authorIdProps: number
   @Input("authorName") authorNameProps: string
   @Input("following") followingProps: boolean
 
@@ -22,9 +23,9 @@ export class FollowAuthorComponent implements OnInit {
 
   handleFollowUnfollow(): void {
     if (this.isFollow) {
-      this.store.dispatch(unfollowAuthorAction({author: this.authorNameProps}))
+      this.store.dispatch(unfollowAuthorAction({authorId: this.authorIdProps}))
     } else {
-      this.store.dispatch(followAuthorAction({author: this.authorNameProps}))
+      this.store.dispatch(followAuthorAction({authorId: this.authorIdProps}))
     }
 
     this.isFollow = !this.isFollow

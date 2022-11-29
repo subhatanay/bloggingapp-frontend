@@ -10,7 +10,7 @@ export class FeedService {
   constructor(private http : HttpClient) {}
 
   getFeed(url: string): Observable<IGetFeedResponse> {
-    const fullUrl = environment.apiUrl + url;
+    const fullUrl = environment.localApiUrl + url;
 
     return this.http.get<IGetFeedResponse>(fullUrl)
   }

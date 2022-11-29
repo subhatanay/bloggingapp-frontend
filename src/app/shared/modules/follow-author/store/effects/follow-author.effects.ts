@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { catchError, map, of, switchMap } from "rxjs";
+import { catchError, map, of, switchMap, tap } from "rxjs";
 import { IUserProfile } from "src/app/userProfile/types/userProfile.interface";
 import { FollowAuthorService } from "../../services/follow-author.service";
 import { followAuthorAction, followAuthorActionFailure, followAuthorActionSuccess, unfollowAuthorAction, unfollowAuthorActionFailure, unfollowAuthorActionSuccess } from "../actions/follow-author.actions";
@@ -8,13 +9,13 @@ import { followAuthorAction, followAuthorActionFailure, followAuthorActionSucces
 @Injectable()
 export class FollowAuthorEffect {
 
-  constructor(private actions$ : Actions, private followAuthorService : FollowAuthorService) {}
+  constructor(private actions$ : Actions, private followAuthorService : FollowAuthorService, private router: Router) {}
 
   followAuthorEffect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(followAuthorAction),
-      switchMap(({author}) => {
-        return this.followAuthorService.followAuthor(author).pipe(
+      switchMap(({authorId}) => {
+        return this.followAuthorService.followAuthor(authorId).pipe(
           map((profile:IUserProfile) => {
             return followAuthorActionSuccess({profile})
           }),
@@ -30,8 +31,8 @@ export class FollowAuthorEffect {
   unFollowAuthorEffect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(unfollowAuthorAction),
-      switchMap(({author}) => {
-        return this.followAuthorService.unFollowAuthor(author).pipe(
+      switchMap(({authorId}) => {
+        return this.followAuthorService.unFollowAuthor(authorId).pipe(
           map((profile:IUserProfile) => {
             return unfollowAuthorActionSuccess({profile})
           }),
@@ -42,6 +43,8 @@ export class FollowAuthorEffect {
       })
     )
   )
+
+
 
 
 }

@@ -11,14 +11,14 @@ export class FollowAuthorService {
   constructor(private http: HttpClient) {}
 
 
-  followAuthor(author: string) : Observable<IUserProfile> {
-    const fullUrl = environment.apiUrl + "/profiles/" + author + "/follow"
+  followAuthor(authorId: number) : Observable<IUserProfile> {
+    const fullUrl = environment.localApiUrl + "/users/" + authorId + "/follow"
     return this.http.post<IGetUserProfileResponse>(fullUrl,{})
     .pipe(map((userProfileResponse: IGetUserProfileResponse) => userProfileResponse.profile))
   }
 
-  unFollowAuthor(author: string) : Observable<IUserProfile> {
-    const fullUrl = environment.apiUrl + "/profiles" + author + "/follow"
+  unFollowAuthor(authorId: number) : Observable<IUserProfile> {
+    const fullUrl = environment.localApiUrl + "/users/" + authorId + "/follow"
     return this.http.delete<IGetUserProfileResponse>(fullUrl)
     .pipe(map((userProfileResponse: IGetUserProfileResponse) => userProfileResponse.profile))
   }

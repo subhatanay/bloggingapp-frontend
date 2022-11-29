@@ -10,16 +10,16 @@ export class AddToFavouriteService {
 
   constructor(private http : HttpClient) {}
 
-  favouriteArticle(slug: string) : Observable<IArticle> {
-    const fullUrl = environment.apiUrl + "/articles/" + slug + "/favorite"
+  favouriteArticle(articleId: number) : Observable<IArticle> {
+    const fullUrl = environment.localApiUrl + "/articles/" + articleId + "/like"
     return this.http.post<IArticleResponse>(fullUrl,{}).pipe(
       map((articleResponse: IArticleResponse) => articleResponse.article)
     )
 
   }
 
-  unFavouriteArticle(slug: string) :  Observable<IArticle> {
-    const fullUrl = environment.apiUrl + "/articles/" + slug + "/favorite"
+  unFavouriteArticle(articleId: number) :  Observable<IArticle> {
+    const fullUrl = environment.localApiUrl + "/articles/" + articleId + "/like"
     return this.http.delete<IArticleResponse>(fullUrl).pipe(
       map((articleResponse: IArticleResponse) => articleResponse.article))
   }

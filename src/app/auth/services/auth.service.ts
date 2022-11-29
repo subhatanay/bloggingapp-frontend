@@ -15,30 +15,30 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   register(data: IRegisterRequest): Observable<ICurrentUser> {
-    const url = environment.apiUrl + '/users';
+    const url = environment.localApiUrl + '/users/signup';
     return this.http
-      .post<IAuthResponse>(url, data)
-      .pipe(map((response: IAuthResponse) => response.user));
+      .post<ICurrentUser>(url, data)
+      .pipe(map((response: ICurrentUser) => response));
   }
 
   login(data: ILoginRequest): Observable<ICurrentUser> {
-    const url = environment.apiUrl + '/users/login';
+    const url = environment.localApiUrl + '/users/login';
     return this.http
-      .post<IAuthResponse>(url, data)
-      .pipe(map((response: IAuthResponse) => response.user));
+      .post<ICurrentUser>(url, data)
+      .pipe(map((response: ICurrentUser) => response));
   }
 
   getCurrentUser(): Observable<ICurrentUser> {
-    const url = environment.apiUrl + '/user';
+    const url = environment.localApiUrl + '/users/me';
     return this.http
       .get(url)
-      .pipe(map((response: IAuthResponse) => response.user));
+      .pipe(map((response: ICurrentUser) => response));
   }
 
-  updateCurrentUser(data: IUpdateUserRequest): Observable<ICurrentUser> {
-    const url = environment.apiUrl + '/user';
+  updateCurrentUser(userId: number, data: IUpdateUserRequest): Observable<ICurrentUser> {
+    const url = environment.localApiUrl + '/users/' + userId + "/profile/info";
     return this.http
-      .put(url, data)
-      .pipe(map((response: IAuthResponse) => response.user));
+    .patch(url, data)
+      .pipe(map((response: ICurrentUser) => response));
   }
 }

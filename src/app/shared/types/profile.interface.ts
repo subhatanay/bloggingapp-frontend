@@ -3,4 +3,6 @@ export class IProfile {
   bio: string | null
   image: string
   folllowing: boolean
+  userId: number
+  userLogoLink : string | null
 }

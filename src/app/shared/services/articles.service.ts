@@ -9,11 +9,11 @@ import { IArticleResponse } from "../types/articleResponse.interface";
 export class ArticleService {
   constructor(private http : HttpClient) {}
 
-  getArticle(slug: string) : Observable<IArticle> {
-    const fullUrl = environment.apiUrl + "/articles/" + slug;
-    return this.http.get<IArticleResponse>(fullUrl).pipe(
-      map((response: IArticleResponse) => {
-        return response.article
+  getArticle(articleId: number) : Observable<IArticle> {
+    const fullUrl = environment.localApiUrl + "/articles/" + articleId;
+    return this.http.get<IArticle>(fullUrl).pipe(
+      map((response: IArticle) => {
+        return response
       })
     )
   }

@@ -18,8 +18,8 @@ export class ArticleEffect {
   getArticle$ = createEffect(() =>
     this.actions$.pipe(
       ofType(getArticleAction),
-      switchMap(( {slug} ) => {
-        return this.articleService.getArticle(slug).pipe(
+      switchMap(( {articleId} ) => {
+        return this.articleService.getArticle(articleId).pipe(
           map((article: IArticle) => {
             return getArticleActionSuccess({ article });
           }),

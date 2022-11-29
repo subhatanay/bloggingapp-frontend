@@ -1,8 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { combineLatest, map, Observable, Subscription } from 'rxjs';
+import { combineLatest, map, Observable, Subscription, tap } from 'rxjs';
 import { currentUserSelector } from 'src/app/auth/store/selectors';
+import { getCommentsAction } from 'src/app/shared/modules/comment/store/actions/comment.action';
+import { commentDataSelector } from 'src/app/shared/modules/comment/store/selectors';
+import { ICommentsResponse } from 'src/app/shared/modules/comment/types/IComment.interface';
 import { IArticle } from 'src/app/shared/types/article.interface';
 import { ICurrentUser } from 'src/app/shared/types/currentUser.interface';
 import { environment } from 'src/environments/environment';
@@ -25,13 +28,13 @@ export class ArticleComponent implements OnInit, OnDestroy {
   article$: Subscription;
   error$: Observable<string | null>;
   isLoading$: Observable<boolean>;
-  articleSlugId: string;
+  articleId: number;
   article: IArticle;
   isAuthor$: Observable<boolean | null>
 
   isArticleFavourited$: Observable<boolean | null>
   favoriteCount$: Observable<number>
-
+  comments$: Observable<ICommentsResponse | null>
 
   constructor(
     private store: Store,
@@ -56,16 +59,18 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
       });
     this.fetchArticleData();
+    this.fetchArticleComments()
   }
 
 
   initializeValues(): void {
-    this.articleSlugId = this.route.snapshot.paramMap.get('slug');
+    this.articleId = parseInt(this.route.snapshot.paramMap.get('articleId'));
 
     this.error$ = this.store.pipe(select(errorArticleSelector));
     this.isLoading$ = this.store.pipe(select(isLoadingArticleSelector));
     this.isArticleFavourited$ = this.store.pipe(select(isFavouriteArticleSelector))
     this.favoriteCount$ = this.store.pipe(select(favoriteAritcleCountSelector))
+    this.comments$ = this.store.pipe(select(commentDataSelector))
 
     this.isAuthor$ = combineLatest(
       this.store.pipe(select(currentUserSelector)),
@@ -82,14 +87,19 @@ export class ArticleComponent implements OnInit, OnDestroy {
   }
 
   fetchArticleData(): void {
-    this.store.dispatch(getArticleAction({ slug: this.articleSlugId }));
+    this.store.dispatch(getArticleAction({ articleId: this.articleId }));
   }
 
-  deleteArticle(slug: string) :void {
-    this.store.dispatch(deleteArticleAction({slug}));
+  fetchArticleComments(): void {
+    this.store.dispatch(getCommentsAction({articleId: this.articleId}))
+  }
+
+  deleteArticle(articleId: number) :void {
+    this.store.dispatch(deleteArticleAction({articleId}));
   }
 
   ngOnDestroy(): void {
     this.article$.unsubscribe();
+
   }
 }

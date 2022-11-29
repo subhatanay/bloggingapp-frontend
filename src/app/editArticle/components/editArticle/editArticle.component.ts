@@ -17,7 +17,7 @@ export class EditArticleComponent implements OnInit {
   isSubmitting$ : Observable<boolean>
   isLoading$ : Observable<boolean>
   backendError$: Observable<IBackendError| null>
-  slug: string
+  articleId: number
 
   constructor(private store: Store, private route: ActivatedRoute) {}
 
@@ -28,7 +28,7 @@ export class EditArticleComponent implements OnInit {
 
 
   initalizeValues() {
-    this.slug = this.route.snapshot.paramMap.get("slug" )
+    this.articleId = parseInt(this.route.snapshot.paramMap.get("articleId" ))
     this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector))
     this.isLoading$ = this.store.pipe(select(isLoadingEditArticleSelector))
     this.backendError$ = this.store.pipe(select(validationErrorsSelector))
@@ -37,23 +37,25 @@ export class EditArticleComponent implements OnInit {
       filter(Boolean),
       map((article: IArticle) => {
         return {
-          title: article.title,
+          subject: article.subject,
           description: article.description,
-          body: article.body,
-          tagList: article.tagList
+          content: article.content,
+          title: '',
+          body: '',
+          tagList: []
         }
       })
     )
   }
 
   fetchArticleData() {
-    this.store.dispatch(getArticleAction({slug: this.slug}))
+    this.store.dispatch(getArticleAction({articleId:this.articleId}))
   }
 
 
-  onSubmit(articleInput: ICreateArticleRequest) {
+  onSubmit(articleInput: IArticleInput) {
     console.log(articleInput)
-    this.store.dispatch(editArticleAction({slug: this.slug,article : articleInput}))
+    this.store.dispatch(editArticleAction({articleId:this.articleId,article : articleInput}))
   }
 
 }

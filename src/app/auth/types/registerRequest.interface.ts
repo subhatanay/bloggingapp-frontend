@@ -1,7 +1,5 @@
 export interface IRegisterRequest {
-  user: {
-    email: string,
+    emailId: string,
     password: string
     username: string
-  }
 }

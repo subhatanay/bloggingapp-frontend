@@ -12,7 +12,7 @@ export class AtricleFormComponent implements OnInit {
   @Input("error") errorProps: IBackendError | null
   @Input("isSubmitting") isSubmittingProps: boolean
 
-  @Output('articleSubmit') articleSubmitEvent = new EventEmitter<ICreateArticleRequest>()
+  @Output('articleSubmit') articleSubmitEvent = new EventEmitter<IArticleInput>()
 
   form: FormGroup
 
@@ -26,22 +26,16 @@ export class AtricleFormComponent implements OnInit {
   initalizeForm() : void {
     console.log(this.initialValues)
     this.form = this.fb.group({
-      title: this.initialValues.title,
+      subject: this.initialValues.subject,
       description: this.initialValues.description,
-      body: this.initialValues.body,
-      tagsList: this.initialValues.tagList.join(' ')
+      content: this.initialValues.content
     })
   }
 
   onSubmit() : void {
     console.log('hellp')
     const articleInputData : IArticleInput = this.form.value
-    articleInputData.tagList = this.form.value["tagsList"].split(" ")
-
-    const createArticleRequest : ICreateArticleRequest = {
-      article: articleInputData
-    }
-    this.articleSubmitEvent.emit(createArticleRequest)
+    this.articleSubmitEvent.emit(articleInputData)
   }
 
 

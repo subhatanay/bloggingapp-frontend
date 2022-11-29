@@ -11,13 +11,10 @@ export class BackendErrorMessagesComponent implements OnInit {
 
   @Input("backendErrors")  backendErrorsProps: IBackendError
 
-  errorMessages: string[]
+  errorMessage: string
 
   ngOnInit(): void {
-    this.errorMessages = Object.keys(this.backendErrorsProps).map((name: string) => {
-      let message = this.backendErrorsProps[name].join('')
-      return `${name} ${message}`
-    } )
+    this.errorMessage = this.backendErrorsProps["errorMessage"]
   }
 
 }

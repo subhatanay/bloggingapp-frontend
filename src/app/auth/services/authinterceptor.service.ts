@@ -20,7 +20,7 @@ export class AuthIntercepter implements HttpInterceptor {
 
     req = req.clone({
       setHeaders: {
-        Authorization: token ? `Token ${token}` : '',
+        Authorization: token ? `Bearer ${token}` : '',
       },
     });
 

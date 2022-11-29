@@ -23,8 +23,8 @@ export class EditArticleEffect {
   getArticleAction$ = createEffect(() =>
     this.actions$.pipe(
       ofType(getArticleAction),
-      switchMap(({ slug }) => {
-        return this.sharedAricleService.getArticle(slug).pipe(
+      switchMap(({ articleId }) => {
+        return this.sharedAricleService.getArticle(articleId).pipe(
           map((article: IArticle) => {
 
             return getArticleActionSuccess({ article });
@@ -42,15 +42,15 @@ export class EditArticleEffect {
   editArticleAction$ = createEffect(() =>
     this.actions$.pipe(
       ofType(editArticleAction),
-      switchMap(({ slug, article }) => {
-        return this.editArticleService.editArticle(slug,article).pipe(
-          map((articleRes: ISaveArticleResponse) => {
+      switchMap(({ articleId, article }) => {
+        return this.editArticleService.editArticle(articleId,article).pipe(
+          map((articleRes: IArticle) => {
 
-            return editArticleActionSuccess({ article:  articleRes.article });
+            return editArticleActionSuccess({ article:  articleRes });
           }),
           catchError((errorResponse: HttpErrorResponse) => {
             return of(
-              editArticleActionFailure({error: errorResponse.error.errors})
+              editArticleActionFailure({error: errorResponse.error})
             );
           })
         );

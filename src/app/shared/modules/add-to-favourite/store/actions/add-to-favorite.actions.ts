@@ -4,7 +4,7 @@ import { AddToFavouriteActionTypes } from "../actionTypes";
 
 export const favouriteAction = createAction(
   AddToFavouriteActionTypes.FAVORITE_ACTION,
-  props<{slug: string}>()
+  props<{articleId: number}>()
 )
 export const favouriteActionSuccess = createAction(
   AddToFavouriteActionTypes.FAVORITE_ACTION_SUCCESS,
@@ -16,12 +16,12 @@ export const favouriteActionFailure = createAction(
 
 export const unFavouriteAction = createAction(
   AddToFavouriteActionTypes.UN_FAVORITE_ACTION,
-  props<{slug: string}>()
+  props<{articleId: number}>()
 )
 export const unFavouriteActionSuccess = createAction(
   AddToFavouriteActionTypes.UN_FAVORITE_ACTION_SUCCESS,
   props<{article: IArticle}>()
 )
 export const unFavouriteActionFailure = createAction(
-  AddToFavouriteActionTypes.UN_FAVORITE_ACTION_FAILURE
+  AddToFavouriteActionTypes.UN_FAVORITE_ACTION_FAILURE,
 )

@@ -34,6 +34,7 @@ export class GetCurrentUserEffect {
             return getCurrentUserActionSuccess({ currentUser });
           }),
           catchError((errorResponse: HttpErrorResponse) => {
+            this.persistanceService.remove('access_token')
             return of(getCurrentUserActionFailure());
           })
         );

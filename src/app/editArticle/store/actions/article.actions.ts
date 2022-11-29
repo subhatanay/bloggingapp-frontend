@@ -6,7 +6,7 @@ import {  EditArticleActionTypes,  } from "../editArticleActionTypes";
 
 export const editArticleAction = createAction(
   EditArticleActionTypes.UPDATE_ARTICLE,
-  props<{slug:string, article: ICreateArticleRequest}>()
+  props<{articleId:number, article: IArticleInput}>()
 )
 
 export const editArticleActionSuccess = createAction(
@@ -21,7 +21,7 @@ export const editArticleActionFailure = createAction(
 
 export const getArticleAction = createAction(
   EditArticleActionTypes.GET_ARTICLE,
-  props<{ slug: string }>()
+  props<{ articleId: number }>()
 );
 
 export const getArticleActionSuccess = createAction(

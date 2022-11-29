@@ -10,9 +10,9 @@ import { IArticleInput, ICreateArticleRequest } from "../../shared/modules/artic
 export class EditArticleService {
   constructor(private http: HttpClient) {}
 
-  editArticle(slug: string,articleInput: ICreateArticleRequest) : Observable<ISaveArticleResponse> {
-    const fullUrl = environment.apiUrl + "/articles/" + slug
-    return this.http.put<ISaveArticleResponse>(fullUrl, articleInput)
+  editArticle(articleId: number,articleInput: IArticleInput) : Observable<IArticle> {
+    const fullUrl = environment.localApiUrl + "/articles/" + articleId
+    return this.http.put<IArticle>(fullUrl, articleInput)
 
   }
 

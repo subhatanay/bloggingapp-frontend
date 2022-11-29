@@ -11,11 +11,11 @@ import { reducers } from './store/reducers';
 
 const routes = [
   {
-    path: 'profiles/:slug',
+    path: 'profiles/:userId',
     component: UserProfileComponent,
   },
   {
-    path: 'profiles/:slug/favorites',
+    path: 'profiles/:userId/favorites',
     component: UserProfileComponent,
   },
 ];
